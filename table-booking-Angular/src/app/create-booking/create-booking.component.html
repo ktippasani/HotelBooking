@@ -1,0 +1,47 @@
+<h4 style="width: 750px; float: right;"> Welcome! Please enter the below details to confirm your booking.</h4>
+<div style="width: 500px; float: right; margin-right: 250px;">
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Your Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="booking.name" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Phone Number</label>
+      <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="booking.phoneNumber" name="phoneNumber">
+    </div>
+
+    <div class="form-group">
+        <label for="name">Email</label>
+        <input type="text" class="form-control" id="email" required [(ngModel)]="booking.email" name="email">
+    </div>
+    <div class="form-group">
+        <label for="name">Head Count</label>
+        <input type="text" class="form-control" id="seatCount" required [(ngModel)]="booking.seatCount" name="seatCount">
+    </div>
+    <div class=" form-group">
+        <div class="form-group">
+            <label for="name">Date and Time Slot Selection</label>
+        </div>
+        <mat-form-field style="width: 200px; height: 65px;">
+          <input matInput [matDatepicker]="datepicker" [min]="minDate" [(ngModel)]="booking.date" name="date" placeholder="Select a date">
+          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+          <mat-datepicker #datepicker></mat-datepicker>
+        </mat-form-field>
+      <br/>
+        <mat-form-field style="width: 200px; height: 70px;">
+          <mat-label >Select a time slot</mat-label>
+          <select matNativeControl class="form-control"  [(ngModel)]="booking.time"  name="time">
+            <option value="">Select a time slot</option>
+            <option value="09:00 AM">09:00 AM</option>
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+            <option value="02:00 PM">02:00 PM</option>
+            <!-- Add more time slots as needed -->
+          </select>
+        </mat-form-field>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+  </form>
+</div>
+
