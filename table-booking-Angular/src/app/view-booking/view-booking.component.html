@@ -1,0 +1,24 @@
+<h2>Your reservation is confirmed. Below is the confirmation for your reference </h2> 
+
+<hr/>
+<div *ngIf="booking">
+  <div>
+    <label><b>Your Name: </b></label> {{booking.name}}
+  </div>
+  <div>
+    <label><b>Phone: </b></label> {{booking.phoneNumber}}
+  </div>
+  <div>
+    <label><b>Email Id: </b></label> {{booking.email}}
+  </div>
+  <div>
+    <label><b>No of seats reserved: </b></label> {{booking.seatCount}}
+  </div>
+  <div>
+    <label><b>Date and Time: </b></label> {{booking.date}} {{booking.time}}
+  </div>  
+</div>
+
+<br>
+<br>
+
