@@ -1,37 +1,52 @@
 <h4 style="width: 750px; float: right;"> Welcome! Please enter the below details to confirm your booking.</h4>
 <div style="width: 500px; float: right; margin-right: 250px;">
-  <form (ngSubmit)="onSubmit()">
+  <form  #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
     <div class="form-group">
       <label for="name">Your Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="booking.name" name="name">
+      <input type="text" class="form-control" id="name" #name="ngModel" [(ngModel)]="booking.name" name="name" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+      <div *ngIf="f.submitted && name.errors" class="invalid-feedback">
+        <div *ngIf="name.errors.required">Name is required</div>
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="name">Phone Number</label>
-      <input type="text" class="form-control" id="phoneNumber" required [(ngModel)]="booking.phoneNumber" name="phoneNumber">
+      <label for="phoneNumber">Phone Number</label>
+      <input type="text" class="form-control" id="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="booking.phoneNumber" name="phoneNumber" [ngClass]="{ 'is-invalid': f.submitted && phoneNumber.invalid }" required>
+      <div *ngIf="f.submitted && phoneNumber.errors" class="invalid-feedback">
+        <div *ngIf="phoneNumber.errors.required">Phone Number is required</div>
+      </div>
     </div>
 
     <div class="form-group">
-        <label for="name">Email</label>
-        <input type="text" class="form-control" id="email" required [(ngModel)]="booking.email" name="email">
-    </div>
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" #email="ngModel" [(ngModel)]="booking.email" name="email" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required>
+        <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+          <div *ngIf="email.errors.required">Email is required</div>
+        </div>
+      </div>
     <div class="form-group">
-        <label for="name">Head Count</label>
-        <input type="text" class="form-control" id="seatCount" required [(ngModel)]="booking.seatCount" name="seatCount">
-    </div>
+        <label for="headCount">Head Count</label>
+        <input type="text" class="form-control" id="seatCount" #seatCount="ngModel" [(ngModel)]="booking.seatCount" name="seatCount" [ngClass]="{ 'is-invalid': f.submitted && seatCount.invalid }" required>
+        <div *ngIf="f.submitted && seatCount.errors" class="invalid-feedback">
+          <div *ngIf="seatCount.errors.required">Head count is required</div>
+        </div>
+      </div>
     <div class=" form-group">
         <div class="form-group">
             <label for="name">Date and Time Slot Selection</label>
         </div>
         <mat-form-field style="width: 200px; height: 65px;">
-          <input matInput [matDatepicker]="datepicker" [min]="minDate" [(ngModel)]="booking.date" name="date" placeholder="Select a date">
+          <input matInput [matDatepicker]="datepicker" [min]="minDate" #date="ngModel" [(ngModel)]="booking.date" name="date" placeholder="Select a date" [ngClass]="{ 'is-invalid': f.submitted && date.invalid }" required>
           <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
           <mat-datepicker #datepicker></mat-datepicker>
         </mat-form-field>
+        <div *ngIf="f.submitted && date.errors" class="invalid-feedback">
+          <div *ngIf="date.errors.required">Date is required</div>
+        </div>
       <br/>
         <mat-form-field style="width: 200px; height: 70px;">
           <mat-label >Select a time slot</mat-label>
-          <select matNativeControl class="form-control"  [(ngModel)]="booking.time"  name="time">
+          <select matNativeControl class="form-control"  #time="ngModel" [(ngModel)]="booking.time"  name="time" [ngClass]="{ 'is-invalid': f.submitted && time.invalid }" required>
             <option value="">Select a time slot</option>
             <option value="09:00 AM">09:00 AM</option>
             <option value="10:00 AM">10:00 AM</option>
@@ -40,6 +55,9 @@
             <!-- Add more time slots as needed -->
           </select>
         </mat-form-field>
+        <div *ngIf="f.submitted && time.errors" class="invalid-feedback">
+          <div *ngIf="time.errors.required">Time is required</div>
+        </div>
     </div>
     <button type="submit" class="btn btn-success">Submit</button>
   </form>
