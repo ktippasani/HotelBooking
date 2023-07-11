@@ -15,7 +15,6 @@ export class CreateBookingComponent implements OnInit{
 
   
   booking: Booking = new Booking();
-  submitted = false;
 
   minDate: Date = new Date();
   
@@ -26,12 +25,7 @@ export class CreateBookingComponent implements OnInit{
 
   ngOnInit() {
   }
-
-  newBooking(): void {
-    this.submitted = false;
-    this.booking = new Booking();
-  }
-
+ //Function to save the form data
   save() {
     this.booking.date = new Date(this.booking.date).toISOString();
     this.bookingService
@@ -42,7 +36,7 @@ export class CreateBookingComponent implements OnInit{
     }, 
     error => console.log(error));
   }
-
+  //This function would be called on form submit
   onSubmit(f: NgForm) {
     //Stop here if form is invalid
     if (f.invalid) {
@@ -51,7 +45,7 @@ export class CreateBookingComponent implements OnInit{
   alert('SUCCESS!! :-)\n\n' + JSON.stringify(f.value, null, 4));
     this.save();    
   }
-
+ //Function to redirect to view page with Id
   gotoList(data : any) {
     this.router.navigate(['bookings', data.id]);
   }

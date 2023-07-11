@@ -10,13 +10,14 @@ import { BookingService } from '../booking-service.service';
 })
 export class ViewBookingComponent implements OnInit {
   
-  id: number = 2;
+  id: number = 0;
   booking: Booking = new Booking();
   constructor(private route: ActivatedRoute, private router: Router,
     private bookingService: BookingService) {
      }
     ngOnInit() {
       this.booking = new Booking();
+      //Get the Id from request URL and make the GET call to get the booking Info to display.
       this.id = this.route.snapshot.params['id'];
       console.log("id======================"+this.id)
       this.bookingService.getBooking(this.id)
