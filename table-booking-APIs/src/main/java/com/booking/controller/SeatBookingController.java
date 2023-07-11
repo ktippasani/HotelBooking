@@ -21,7 +21,7 @@ import com.booking.model.SeatBooking;
 import com.booking.service.SeatBookingService;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
 public class SeatBookingController {
@@ -29,28 +29,32 @@ public class SeatBookingController {
 	@Autowired
 	private SeatBookingService seatBookingService;
 
+	//POST API call to create booking
 	@PostMapping("/seat-bookings")
 	public SeatBooking saveSeatBooking(@RequestBody SeatBooking seatBooking) {
 		return seatBookingService.saveSeatBooking(seatBooking);
 	}
-
+	
+	//GET API call to get booking for given Id
 	@GetMapping("/seat-bookings/{id}")
-	public ResponseEntity<SeatBooking>  getBookingById(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<SeatBooking> getBookingById(@PathVariable(value = "id") Long id) {
 
 		SeatBooking seatBooking = seatBookingService.getBookingById(id);
 		return ResponseEntity.ok().body(seatBooking);
 	}
-
+	
+	//UPDATE API call to update the booking
 	@PutMapping("/seat-bookings/{id}")
 	public SeatBooking updateBooking(@PathVariable(value = "id") Long id,  @RequestBody SeatBooking seatBooking ) {
 		return seatBookingService.updateBooking(id, seatBooking);
 	}
 
+	//DELETE API call to delete the booking for given Id
 	@DeleteMapping("/seat-bookings/{id}")
 	public void deleteBooking(@PathVariable(value = "id") Long id) {
 		seatBookingService.deleteBooking(id);
 	}
-
+	//GET API call to get list of bookings for given Date
 	@GetMapping("/seat-bookings")
 	public List<SeatBooking> getSeatBookingsByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 		return seatBookingService.getSeatBookingsByDate(date);
